@@ -6,10 +6,12 @@ import com.palvair.contacts.domain.Contact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class UpdateContactResource {
 
@@ -18,7 +20,7 @@ public class UpdateContactResource {
     @Autowired
     private ContactService contactService;
 
-    @PutMapping("/update-contact")
+    @PutMapping("/contacts/update-contact")
     public Contact updateContact(@RequestBody UpdateContactCommand command) {
         LOGGER.info("Command for updating contact {}", command);
         return contactService.updateContact(command);
