@@ -1,16 +1,15 @@
 package com.palvair.contacts.presentation;
 
-import com.palvair.contacts.application.DeleteContactCommand;
 import com.palvair.contacts.domain.ContactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 public class DeleteContactResource {
 
@@ -19,10 +18,10 @@ public class DeleteContactResource {
     @Autowired
     private ContactRepository contactRepository;
 
-    @DeleteMapping("/delete-contact")
-    public void deleteContact(@RequestBody DeleteContactCommand command) {
-        LOGGER.info("Command for deleting contact {}", command);
-        LOGGER.info("Deleting contact {}", command.getId());
-        contactRepository.deleteById(command.getId());
+    @DeleteMapping("/contacts/delete-contact/{id}")
+    public void deleteContact(@PathVariable("id") String id) {
+        LOGGER.info("Command for deleting contact {}", id);
+        contactRepository.deleteById(id);
+        LOGGER.info("Contact {} deleted",id);
     }
 }
