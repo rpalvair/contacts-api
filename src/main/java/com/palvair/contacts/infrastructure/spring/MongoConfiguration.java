@@ -20,8 +20,8 @@ public class MongoConfiguration {
         return args -> {
             LOGGER.info("initDb");
             contactRepository.deleteAll();
-            contactRepository.save(new Contact("Ruddy", "Palvair", 35L));
-            contactRepository.save(new Contact("Jessie", "Palvair", 37L));
+            contactRepository.save(new Contact("Jean", "Dupond", 35L));
+            contactRepository.save(new Contact("John", "Doe", 37L));
         };
     }
 }
