@@ -22,6 +22,6 @@ public class DeleteContactResource {
     public void deleteContact(@PathVariable("id") String id) {
         LOGGER.info("Command for deleting contact {}", id);
         contactRepository.deleteById(id);
-        LOGGER.info("Contact {} deleted",id);
+        LOGGER.info("Contact {} deleted", id);
     }
 }
