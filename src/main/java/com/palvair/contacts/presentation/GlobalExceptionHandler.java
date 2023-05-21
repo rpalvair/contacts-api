@@ -18,9 +18,19 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ContactNotFoundException.class)
     @ResponseBody
-    public ContactsError handleException(final Exception exception) {
+    public ContactsError handleContactNotFoundException(final ContactNotFoundException exception) {
         logger.info("Handle exception:", exception);
         final ContactsError contactsError = new ContactsError(exception.getLocalizedMessage());
+        logger.info("contactsError {}", contactsError);
+        return contactsError;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ContactsError handleException(final Exception exception) {
+        logger.info("Handle exception:", exception);
+        final ContactsError contactsError = new ContactsError("Unexpected error occurs");
         logger.info("contactsError {}", contactsError);
         return contactsError;
     }
