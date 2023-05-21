@@ -1,4 +1,4 @@
-package com.palvair.contacts.presentation;
+package com.palvair.contacts.presentation.advice;
 
 import com.palvair.contacts.application.exceptions.ContactNotFoundException;
 import com.palvair.contacts.presentation.errors.ContactsError;
