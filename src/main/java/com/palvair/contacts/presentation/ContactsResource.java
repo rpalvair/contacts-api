@@ -4,6 +4,7 @@ import com.palvair.contacts.application.exceptions.ContactNotFoundException;
 import com.palvair.contacts.domain.Contact;
 import com.palvair.contacts.domain.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,8 @@ public class ContactsResource {
     }
 
     @GetMapping("/contacts/{id}")
-    public Contact getOne(@PathVariable String id) {
-        return contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(String.format("Contact not found with id %s", id)));
+    public ResponseEntity<?> getOne(@PathVariable String id) {
+        final Contact contact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(String.format("Contact not found with id %s", id)));
+        return ResponseEntity.ok(contact);
     }
 }
