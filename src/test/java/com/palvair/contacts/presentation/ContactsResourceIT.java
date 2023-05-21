@@ -14,9 +14,9 @@ import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = ApplicationConfiguration.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ContactsResourceTest {
+class ContactsResourceIT {
 
-    private static final Logger logger = LoggerFactory.getLogger(ContactsResourceTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactsResourceIT.class);
 
     @Autowired
     private TestRestTemplate testRestTemplate;
