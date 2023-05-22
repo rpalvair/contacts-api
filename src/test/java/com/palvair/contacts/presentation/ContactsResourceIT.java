@@ -44,7 +44,7 @@ class ContactsResourceIT {
 
     @Test
     void should_return_error_with_status_500_when_unexpected_error_occurs() {
-        doThrow(new IllegalArgumentException()).when(contactRepository).findById("42");
+        doThrow(new IllegalArgumentException("Dummy message")).when(contactRepository).findById("42");
 
         final ResponseEntity<ContactsError> entity = testRestTemplate.getForEntity("/contacts/42", ContactsError.class);
 
@@ -57,6 +57,6 @@ class ContactsResourceIT {
         final ContactsError body = entity.getBody();
         assertThat(body).isNotNull()
                 .extracting(ContactsError::getMessage)
-                .isEqualTo("Unexpected error occurs");
+                .isEqualTo("Unexpected error occurs - Dummy message");
     }
 }
