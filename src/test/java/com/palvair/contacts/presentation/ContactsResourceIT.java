@@ -20,6 +20,8 @@ import static org.mockito.Mockito.doThrow;
 class ContactsResourceIT {
 
     private static final Logger logger = LoggerFactory.getLogger(ContactsResourceIT.class);
+    private static final String ID = "42";
+    private static final String URL = "/contacts/" + ID;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -28,7 +30,7 @@ class ContactsResourceIT {
 
     @Test
     void should_return_error_with_status_404_when_contact_not_found() {
-        final ResponseEntity<ContactsError> entity = testRestTemplate.getForEntity("/contacts/42", ContactsError.class);
+        final ResponseEntity<ContactsError> entity = testRestTemplate.getForEntity(URL, ContactsError.class);
 
         assertThat(entity).isNotNull()
                 .extracting(ResponseEntity::getStatusCode)
@@ -44,9 +46,9 @@ class ContactsResourceIT {
 
     @Test
     void should_return_error_with_status_500_when_unexpected_error_occurs() {
-        doThrow(new IllegalArgumentException("Dummy message")).when(contactRepository).findById("42");
+        doThrow(new IllegalArgumentException("Dummy message")).when(contactRepository).findById(ID);
 
-        final ResponseEntity<ContactsError> entity = testRestTemplate.getForEntity("/contacts/42", ContactsError.class);
+        final ResponseEntity<ContactsError> entity = testRestTemplate.getForEntity(URL, ContactsError.class);
 
         assertThat(entity).isNotNull()
                 .extracting(ResponseEntity::getStatusCode)
